@@ -1,7 +1,7 @@
 import { Contract, JsonRpcProvider, Wallet } from 'ethers'
 import { parseDid, validateDid } from './utils/did'
 import { v4 as uuidv4 } from 'uuid'
-import { abi, testSchemaSample } from '../tests/fixtures/test.data'
+import { abi } from '../tests/fixtures/test.data'
 import schemaAbi from '../tests/fixtures/SchemaRegistry.json'
 import axios from 'axios'
 
@@ -33,8 +33,8 @@ export type ResourcePayload = {
   nextVersionId: string | null
 }
 
-export class PolygonSchema {
-  private registry: Contract
+export class PolygonDID {
+  private didRegistry: Contract
   private schemaRegistry: Contract
   private fileServerUrl: string
   private accessToken: string
@@ -49,7 +49,7 @@ export class PolygonSchema {
   }: PolygonDidInitOptions) {
     const provider = new JsonRpcProvider(rpcUrl)
     const wallet = new Wallet(privateKey, provider)
-    this.registry = new Contract(
+    this.didRegistry = new Contract(
       contractAddress,
       abi, //test ABI
       wallet,
@@ -72,23 +72,20 @@ export class PolygonSchema {
       }
       const parsedDid = parseDid(did)
 
-      const didDocument = await this.registry.getDIDDoc(parsedDid.didAddress)
-      console.log('didDocument::::', didDocument)
-
+      const didDocument = await this.didRegistry.getDIDDoc(parsedDid.didAddress)
       if (!didDocument[0]) {
         throw new Error(`The DID document for the given DID was not found!`)
       }
 
       const schemaId = uuidv4()
-      const schematxnReceipt = await this.schemaRegistry.createSchema(
+      const schemaTxnReceipt = await this.schemaRegistry.createSchema(
         parsedDid.didAddress,
         schemaId,
         schemaJson,
       )
-      console.log('schematxnReceipt::::', schematxnReceipt)
-      if (schematxnReceipt) {
+      if (schemaTxnReceipt) {
         const resourceId = uuidv4()
-        addedResourcetxnReceipt = await this.registry.addResources(
+        addedResourcetxnReceipt = await this.didRegistry.addResources(
           parsedDid.didAddress,
           resourceId,
           schemaJson,
@@ -122,7 +119,7 @@ export class PolygonSchema {
       return {
         did,
         schemaId,
-        schematxnReceipt,
+        schemaTxnReceipt,
       }
     } catch (error) {
       console.log(`Error occurred in createSchema function ${error} `)
@@ -139,11 +136,11 @@ export class PolygonSchema {
 
       const parsedDid = parseDid(did)
 
-      const didDocument = await this.registry.getDIDDoc(parsedDid.didAddress)
+      const didDocument = await this.didRegistry.getDIDDoc(parsedDid.didAddress)
       if (!didDocument[0]) {
         throw new Error(`The DID document for the given DID was not found!`)
       }
-      const schemaDetails = await this.registry.getSchemaById(
+      const schemaDetails = await this.didRegistry.getSchemaById(
         parsedDid.didAddress,
         schemaId,
       )
