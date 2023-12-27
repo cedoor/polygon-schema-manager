@@ -33,7 +33,7 @@ export type ResourcePayload = {
   nextVersionId: string | null
 }
 
-export class PolygonDID {
+export class PolygonSchema {
   private didRegistry: Contract
   private schemaRegistry: Contract
   private fileServerUrl: string
