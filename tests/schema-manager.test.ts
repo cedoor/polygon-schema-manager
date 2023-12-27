@@ -1,15 +1,26 @@
-import { testDidDetails, resourceJson, testResourceId, updateDidDocument, testContractDetails } from './fixtures/test.data'
+import {
+  testDidDetails,
+  resourceJson,
+  testResourceId,
+  updateDidDocument,
+  testContractDetails,
+  testSchemaSample,
+  fileServerUrl,
+  fileServerAccessToken,
+} from './fixtures/test.data'
 import { describe, it, before } from 'node:test'
 import assert from 'node:assert'
 import { arrayHasKeys } from './utils/array'
-import { PolygonDID } from '../src/schema-manager'
+import { PolygonSchema } from '../src/schema-manager'
+import axios from 'axios'
 
 const NETWORK_URL = testContractDetails.networkUrl
 const DID_REGISTRAR_CONTRACT_ADDRESS = testContractDetails.contractAddress //Can add external smart contract
-const SCHEMA_MANAGER_CONTRACT_ADDRESS =  testContractDetails.schemaManagerContract
+const SCHEMA_MANAGER_CONTRACT_ADDRESS =
+  testContractDetails.schemaManagerContract
 
 describe('Registrar', () => {
-  let polygonSchemaManager: PolygonDID
+  let polygonSchemaManager: PolygonSchema
   let polygonDID: any
   let keyPair: {
     address: string
@@ -20,37 +31,36 @@ describe('Registrar', () => {
     address: '',
     privateKey: '',
     publicKeyBase58: '',
-    did: ''
-  };
+    did: '',
+  }
 
   before(async () => {
-
     polygonDID = testDidDetails.did
-    polygonSchemaManager = new PolygonDID({
+    polygonSchemaManager = new PolygonSchema({
       contractAddress: DID_REGISTRAR_CONTRACT_ADDRESS,
       schemaManagerContractAddress: SCHEMA_MANAGER_CONTRACT_ADDRESS,
       rpcUrl: NETWORK_URL,
       privateKey: testDidDetails.privateKey,
+      serverUrl: fileServerUrl,
+      fileServerToken: fileServerAccessToken
     })
     await new Promise((r) => setTimeout(r, 5000))
   })
 
-  
-  
   describe('test register schema function', () => {
-    let addResource: any;
+    let addedSchema: any
 
     before(async () => {
-      const addSchema = await polygonSchemaManager.createSchema(
+      addedSchema = await polygonSchemaManager.createSchema(
         testDidDetails.did,
-        resourceJson
+        testSchemaSample,
       )
     })
-    
+
     it('should get transaction hash after register DID document', async () => {
-      assert.ok(addResource.txnHash)
+      assert.ok(addedSchema.schematxnReceipt)
       assert.equal(
-        arrayHasKeys(Object.keys(addResource.txnHash), [
+        arrayHasKeys(Object.keys(addedSchema.schematxnReceipt), [
           'nonce',
           'gasPrice',
           'gasLimit',
@@ -69,7 +79,5 @@ describe('Registrar', () => {
         true,
       )
     })
-
-
   })
 })
