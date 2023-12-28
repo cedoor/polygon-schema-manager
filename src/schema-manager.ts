@@ -3,6 +3,7 @@ import { parseDid, validateDid } from './utils/did'
 import { v4 as uuidv4 } from 'uuid'
 import { abi } from '../tests/fixtures/test.data'
 import schemaAbi from '../tests/fixtures/SchemaRegistry.json'
+import { buildSchemaResource } from '../src/utils/schemaHelper'
 import axios from 'axios'
 
 export type PolygonDidInitOptions = {
@@ -63,8 +64,14 @@ export class PolygonSchema {
     )
   }
 
-  public async createSchema(did: string, schemaJson: any) {
-    let addedResourcetxnReceipt
+  public async createSchema(did: string, schemaName: string) {
+    let schemaId;
+    let tnxSchemaId = '';
+
+    if (!this.accessToken) {
+      throw new Error(`Invalid token!`)
+    }
+
     try {
       const isValidDid = validateDid(did)
       if (!isValidDid) {
@@ -76,54 +83,72 @@ export class PolygonSchema {
       if (!didDocument[0]) {
         throw new Error(`The DID document for the given DID was not found!`)
       }
+       schemaId = uuidv4()
+      const schemaResource: ResourcePayload = await buildSchemaResource(
+        did,
+        schemaId,
+        schemaName,
+      )
 
-      const schemaId = uuidv4()
       const schemaTxnReceipt = await this.schemaRegistry.createSchema(
         parsedDid.didAddress,
         schemaId,
-        schemaJson,
+        JSON.stringify(schemaResource),
       )
-      if (schemaTxnReceipt) {
-        const resourceId = uuidv4()
-        addedResourcetxnReceipt = await this.didRegistry.addResources(
-          parsedDid.didAddress,
-          resourceId,
-          schemaJson,
-        )
-        console.log('addedResourcetxnReceipt::::', addedResourcetxnReceipt)
-        if (addedResourcetxnReceipt) {
-          const schemaPayload = {
-            schemaId: `${schemaId}`,
-            schema: schemaJson,
-          }
+      
+      if (!schemaTxnReceipt.hash) {
+        throw new Error(`Error while adding schema in Registry!`)
+      }
+      const addedResourcetxnReceipt = await this.didRegistry.addResources(
+        parsedDid.didAddress,
+        schemaId,
+        JSON.stringify(schemaResource),
+      )
 
-          // Axios options for the POST request
-          const axiosOptions = {
-            method: 'post',
-            url: this.fileServerUrl,
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${this.accessToken}`,
-            },
-            data: JSON.stringify(schemaPayload),
-          }
-          try {
-            const response = await axios(axiosOptions)
-            console.log('res', response.data)
-          } catch (error: any) {
-            console.error('Error:', error.response.data as Error)
-          }
-        }
+      if (!addedResourcetxnReceipt.hash) {
+        tnxSchemaId = schemaId
+        throw new Error(`Error while adding schema resource in DID Registry!`)
+      }
+
+      const uploadSchemaDetails = await this.uploadSchemaFile(
+        schemaId,
+        schemaResource,
+      )
+      if (!uploadSchemaDetails) {
+        throw new Error(`Error while uploading schema on file server!`)
       }
 
       return {
         did,
         schemaId,
-        schemaTxnReceipt,
+        txnReceipt: {
+          schemaTxnReceipt: {
+            txnHash: schemaTxnReceipt.hash,
+            to: schemaTxnReceipt.to,
+            from: schemaTxnReceipt.from,
+            nonce: schemaTxnReceipt.nonce,
+            gasLimit: schemaTxnReceipt.nonce,
+            chainId: schemaTxnReceipt.chainId,
+          },
+          resourceTxnReceipt: {
+            txnHash: addedResourcetxnReceipt.hash,
+            to: addedResourcetxnReceipt.to,
+            from: addedResourcetxnReceipt.from,
+            nonce: addedResourcetxnReceipt.nonce,
+            gasLimit: addedResourcetxnReceipt.nonce,
+            chainId: addedResourcetxnReceipt.chainId,
+          },
+        },
       }
     } catch (error) {
       console.log(`Error occurred in createSchema function ${error} `)
-      throw error
+      return {
+        tnxSchemaId,
+        schemaState: {
+          state: 'failed',
+          reason: `unknownError: ${error}`,
+        },
+      }
     }
   }
 
@@ -140,16 +165,42 @@ export class PolygonSchema {
       if (!didDocument[0]) {
         throw new Error(`The DID document for the given DID was not found!`)
       }
-      const schemaDetails = await this.didRegistry.getSchemaById(
+      const schemaDetails = await this.schemaRegistry.getSchemaById(
         parsedDid.didAddress,
         schemaId,
       )
 
-      return {
-        schemaDetails,
-      }
+      return JSON.parse(schemaDetails)
     } catch (error) {
       console.log(`Error occurred in createSchema function ${error} `)
+      throw error
+    }
+  }
+
+  private async uploadSchemaFile(
+    schemaResourceId: string,
+    schemaResourcePayload: ResourcePayload,
+  ) {
+    try {
+      const schemaPayload = {
+        schemaId: `${schemaResourceId}`,
+        schema: schemaResourcePayload,
+      }
+
+      const axiosOptions = {
+        method: 'post',
+        url: `${this.fileServerUrl}/schemas`,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${this.accessToken}`,
+        },
+        data: JSON.stringify(schemaPayload),
+      }
+
+      const response = await axios(axiosOptions)
+      return response
+    } catch (error) {
+      console.log(`Error occurred in uploadSchemaFile function ${error} `)
       throw error
     }
   }

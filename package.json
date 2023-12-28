@@ -26,6 +26,7 @@
     "@ethersproject/signing-key": "^5.7.0",
     "@ethersproject/transactions": "^5.7.0",
     "@ethersproject/wallet": "^5.7.0",
+    "axios": "^1.6.3",
     "ethers": "^6.9.0",
     "uuid": "^9.0.1"
   },

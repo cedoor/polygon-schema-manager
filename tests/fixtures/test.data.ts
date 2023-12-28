@@ -1,13 +1,13 @@
 export const updateDidDocument = ''
 
 export const privateKey =
-  '0ea046d14744e1e5dd05fc1ca1ba3de78466cb02750ce4418e038786c0bb6b46'
+  '8b5518752d5daa457b7d33ad2f080a76ba405f1eca7800c07d09fd26231746ba'
 
 export const network = 'testnet'
 
-export const resourceJson = {
+export const schemaResourceJson = {
   resourceURI:
-    'did:polygon:testnet:0x07D796042a38699CC8096750a7ff6f0A629D6d7C/resources/398cee0a-efac-4643-9f4c-74c48c72a14b',
+    'did:polygon:testnet:0xc0e2083Dd8b8CDbbf8fb29eb47F8d2228B71dd60/resources/398cee0a-efac-4643-9f4c-74c48c72a14b',
   resourceCollectionId: '55dbc8bf-fba3-4117-855c-1e0dc1d3bb47',
   resourceId: '398cee0a-efac-4643-9f4c-74c48c72a14b',
   resourceName: 'Eventbrite1 Logo',
@@ -360,10 +360,10 @@ export const abi = [
 ]
 
 export const testDidDetails = {
-  address: '0x07D796042a38699CC8096750a7ff6f0A629D6d7C',
-  did: 'did:polygon:testnet:0x07D796042a38699CC8096750a7ff6f0A629D6d7C',
+  address: '0xc0e2083Dd8b8CDbbf8fb29eb47F8d2228B71dd60',
+  did: 'did:polygon:testnet:0xc0e2083Dd8b8CDbbf8fb29eb47F8d2228B71dd60',
   privateKey:
-    '0ea046d14744e1e5dd05fc1ca1ba3de78466cb02750ce4418e038786c0bb6b46', //test key
+    '8b5518752d5daa457b7d33ad2f080a76ba405f1eca7800c07d09fd26231746ba', //test key
   publicKeyBase58:
     '7Lnm1Zi2K75KVgHPrHADCpfa9cLAtRRocBgLsFVLw5NRPUgoLBBv1Se8ttjx4P7fXfNS5gazJmKqohNmwEqx8VjDYfPvw',
 }
@@ -596,8 +596,10 @@ export const testSchemaSample = {
   ],
 }
 
+export const testSchemaId = '74b83e7d-2e88-47ba-9f74-a974998fc389'
+
 export const fileServerUrl =
-  'https://ab85-103-97-166-226.ngrok-free.app/schemas'
+  'https://e573-103-97-166-226.ngrok-free.app'
 
 export const fileServerAccessToken =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJBeWFuV29ya3MiLCJpZCI6IjdmYjRmN2I3LWQ5ZWUtNDYxOC04OTE4LWZiMmIzYzY1M2EyYiJ9.x-kHeTVqX4w19ibSAspCYgIL-JFVss8yZ0CT21QVRYM'
