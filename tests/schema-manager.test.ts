@@ -10,7 +10,6 @@ import assert from 'node:assert'
 import { arrayHasKeys } from './utils/array'
 import { PolygonSchema } from '../src/schema-manager'
 
-
 const NETWORK_URL = testContractDetails.networkUrl
 const DID_REGISTRAR_CONTRACT_ADDRESS = testContractDetails.contractAddress
 const SCHEMA_MANAGER_CONTRACT_ADDRESS =
@@ -38,13 +37,14 @@ describe('Registrar', () => {
   before(async () => {
     registeredSchemaDetails = await polygonSchemaManager.createSchema(
       testDidDetails.did,
-      'Test Cred',
+      'PAN CARD',
     )
+    console.log('registeredSchemaDetails::::', registeredSchemaDetails)
   })
 
   it('should get transaction hash after registering schema with non-empty and non-null values for both schemaTxnReceipt and resourceTxnReceipt', async () => {
-    assert.ok(registeredSchemaDetails.txnReceipt.schemaTxnReceipt)
-    assert.ok(registeredSchemaDetails.txnReceipt.resourceTxnReceipt)
+    assert.ok(registeredSchemaDetails?.txnReceipt?.schemaTxnReceipt)
+    assert.ok(registeredSchemaDetails?.txnReceipt?.resourceTxnReceipt)
 
     // Check keys and values for schemaTxnReceipt
 
@@ -65,13 +65,13 @@ describe('Registrar', () => {
 
     schemaReceiptKeys.forEach((key) => {
       assert.ok(
-        registeredSchemaDetails.txnReceipt.schemaTxnReceipt[key],
+        registeredSchemaDetails?.txnReceipt?.schemaTxnReceipt[key],
         `${key} should not be empty or null`,
       )
     })
 
     const resourceReceiptKeys = Object.keys(
-      registeredSchemaDetails.txnReceipt.resourceTxnReceipt,
+      registeredSchemaDetails?.txnReceipt?.resourceTxnReceipt,
     )
     assert.equal(
       arrayHasKeys(resourceReceiptKeys, [
@@ -87,7 +87,7 @@ describe('Registrar', () => {
 
     resourceReceiptKeys.forEach((key) => {
       assert.ok(
-        registeredSchemaDetails.txnReceipt.resourceTxnReceipt[key],
+        registeredSchemaDetails?.txnReceipt?.resourceTxnReceipt[key],
         `${key} should not be empty or null`,
       )
     })
@@ -99,7 +99,7 @@ describe('Registrar', () => {
     before(async () => {
       schemaDetail = await polygonSchemaManager.getSchemaById(
         testDidDetails.did,
-        testSchemaId,
+        '957e577f-744e-4790-bcf2-b5e4c43aa240',
       )
     })
 

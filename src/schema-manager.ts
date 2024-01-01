@@ -1,9 +1,9 @@
 import { Contract, JsonRpcProvider, Wallet } from 'ethers'
 import { parseDid, validateDid } from './utils/did'
 import { v4 as uuidv4 } from 'uuid'
-import { abi } from '../tests/fixtures/test.data'
-import schemaAbi from '../tests/fixtures/SchemaRegistry.json'
+import SchemaRegistryAbi from '../tests/fixtures/SchemaRegistryAbi.json'
 import { buildSchemaResource } from '../src/utils/schemaHelper'
+import { didRegistryAbi } from '../tests/fixtures/test.data'
 import axios from 'axios'
 
 export type PolygonDidInitOptions = {
@@ -52,21 +52,21 @@ export class PolygonSchema {
     const wallet = new Wallet(privateKey, provider)
     this.didRegistry = new Contract(
       contractAddress,
-      abi, //test ABI
+      didRegistryAbi, //DID registry ABI
       wallet,
     )
     this.accessToken = fileServerToken
     this.fileServerUrl = serverUrl
     this.schemaRegistry = new Contract(
       schemaManagerContractAddress,
-      schemaAbi, //schemaAbi ABI
+      SchemaRegistryAbi, //schemaAbi ABI
       wallet,
     )
   }
 
   public async createSchema(did: string, schemaName: string) {
-    let schemaId;
-    let tnxSchemaId = '';
+    let schemaId
+    let tnxSchemaId = ''
 
     if (!this.accessToken) {
       throw new Error(`Invalid token!`)
@@ -83,7 +83,7 @@ export class PolygonSchema {
       if (!didDocument[0]) {
         throw new Error(`The DID document for the given DID was not found!`)
       }
-       schemaId = uuidv4()
+      schemaId = uuidv4()
       const schemaResource: ResourcePayload = await buildSchemaResource(
         did,
         schemaId,
@@ -95,11 +95,12 @@ export class PolygonSchema {
         schemaId,
         JSON.stringify(schemaResource),
       )
-      
+
+
       if (!schemaTxnReceipt.hash) {
         throw new Error(`Error while adding schema in Registry!`)
       }
-      const addedResourcetxnReceipt = await this.didRegistry.addResources(
+      const addedResourcetxnReceipt = await this.didRegistry.addResource(
         parsedDid.didAddress,
         schemaId,
         JSON.stringify(schemaResource),

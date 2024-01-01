@@ -28,7 +28,15 @@
     "@ethersproject/wallet": "^5.7.0",
     "axios": "^1.6.3",
     "ethers": "^6.9.0",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "@openzeppelin/truffle-upgrades": "^1.15.0",
+    "@truffle/hdwallet-provider": "^2.0.10",
+    "dotenv": "^16.0.2",
+    "ganache-cli": "6.12.2",
+    "mocha": "^7.0.0",
+    "release-it": "^16.3.0",
+    "solc": "^0.8.21",
+    "truffle": "^5.5.20"
   },
   "devDependencies": {
     "@types/node": "^18.17.0",

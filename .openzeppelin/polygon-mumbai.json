@@ -1,0 +1,75 @@
+{
+  "manifestVersion": "3.2",
+  "admin": {
+    "address": "0xE3dCB856a7038ede083083c10D9a66Fd401752B8",
+    "txHash": "0x6b3d93ef383e38acd5bc9167ec31b9a9c44cf01e234ddea50ff9bcdceda24f7a"
+  },
+  "proxies": [
+    {
+      "address": "0xDc8063aC8b03a09E10b84831e94B218C1192Dd18",
+      "txHash": "0xfaf9949ebc0fc7ebeec0a56e9eefe35fef85dc3191602a18fe874babcb9eb71b",
+      "kind": "transparent"
+    },
+    {
+      "address": "0xE3F77cb485f0e75Afd75b05b0A74A91568B3174a",
+      "txHash": "0x654184912f3e47bb737b9c2eb1f980ed7171d2eb408541349a6d3dccdfc155f5",
+      "kind": "transparent"
+    }
+  ],
+  "impls": {
+    "f7328d5d2b266c1834536273f7ef19f486b48786bd360fda2ba36d23e140d51e": {
+      "address": "0x432907312da67C42c9C80cF0f76E665DB7fb7e49",
+      "txHash": "0x4049ca12a03494a0133d8eae96fbe56f86408ef8c8284aee5277eaa212540e58",
+      "layout": {
+        "solcVersion": "0.8.16",
+        "storage": [
+          {
+            "contract": "SchemaRegistry",
+            "label": "owner",
+            "type": "t_address",
+            "src": "../project:/contracts/schemaManager.sol:9"
+          },
+          {
+            "contract": "SchemaRegistry",
+            "label": "schemas",
+            "type": "t_mapping(t_address,t_mapping(t_string_memory_ptr,t_struct(Schema)40_storage))",
+            "src": "../project:/contracts/schemaManager.sol:15"
+          },
+          {
+            "contract": "SchemaRegistry",
+            "label": "initialized",
+            "type": "t_bool",
+            "src": "../project:/contracts/schemaManager.sol:19"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address"
+          },
+          "t_mapping(t_address,t_mapping(t_string_memory_ptr,t_struct(Schema)40_storage))": {
+            "label": "mapping(address => mapping(string => struct SchemaRegistry.Schema))"
+          },
+          "t_mapping(t_string_memory_ptr,t_struct(Schema)40_storage)": {
+            "label": "mapping(string => struct SchemaRegistry.Schema)"
+          },
+          "t_string_storage": {
+            "label": "string"
+          },
+          "t_struct(Schema)40_storage": {
+            "label": "struct SchemaRegistry.Schema",
+            "members": [
+              {
+                "label": "schemaJson",
+                "type": "t_string_storage"
+              }
+            ]
+          },
+          "t_bool": {
+            "label": "bool"
+          }
+        },
+        "namespaces": {}
+      }
+    }
+  }
+}
