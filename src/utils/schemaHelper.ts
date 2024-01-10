@@ -1,4 +1,4 @@
-import { parseDid } from "./did";
+import { parseDid } from './did'
 
 /**
  * Build schema JSON.
@@ -13,15 +13,14 @@ export async function buildSchemaResource(
   name: string,
 ) {
   return {
-    resourceURI:
-      `${did}/resources/${schemaId}`,
+    resourceURI: `${did}/resources/${schemaId}`,
     resourceCollectionId: parseDid(did).didAddress,
     resourceId: `${schemaId}`,
     resourceName: `${name}`,
     resourceType: 'W3C-schema',
     mediaType: '',
     created: new Date().toISOString(),
-    checksum:'',
+    checksum: '',
     previousVersionId: '',
     nextVersionId: '',
   }

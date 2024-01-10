@@ -96,7 +96,6 @@ export class PolygonSchema {
         JSON.stringify(schemaResource),
       )
 
-
       if (!schemaTxnReceipt.hash) {
         throw new Error(`Error while adding schema in Registry!`)
       }

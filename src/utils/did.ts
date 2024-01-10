@@ -11,7 +11,8 @@ export function getNetworkFromDid(did: string) {
 
 export function parseDid(did: string) {
   const network = getNetworkFromDid(did)
-  const didAddress = network === 'testnet' ? did.split(':')[3] : did.split(':')[2]
+  const didAddress =
+    network === 'testnet' ? did.split(':')[3] : did.split(':')[2]
   return {
     network,
     didAddress,

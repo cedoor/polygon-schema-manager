@@ -1,1 +1,1 @@
-export * from "./schema-manager"
+export * from './schema-manager'
