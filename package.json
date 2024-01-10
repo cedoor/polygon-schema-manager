@@ -9,7 +9,7 @@
   "scripts": {
     "clean": "rm -rf build",
     "clean:deps": "pnpm clean && rm -rf node_modules",
-    "build": "tsc",
+    "build": "pnpm clean && tsc",
     "test": "node --require ts-node/register --test ./tests/schema-manager.test.ts",
     "prettier": "prettier --ignore-path .prettierignore .",
     "check-format": "pnpm prettier --list-different",
@@ -39,10 +39,6 @@
     "solc": "^0.8.21",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
-  },
-  "types": "./build/index.d.ts",
-  "directories": {
-    "test": "tests"
   },
   "repository": {
     "type": "git",
