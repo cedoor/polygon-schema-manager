@@ -64,7 +64,7 @@ export class PolygonSchema {
     )
   }
 
-  public async createSchema(did: string, schemaName: string) {
+  public async createSchema(did: string, schemaName: string, schema: object) {
     let schemaId
     let tnxSchemaId = ''
 
@@ -110,10 +110,8 @@ export class PolygonSchema {
         throw new Error(`Error while adding schema resource in DID Registry!`)
       }
 
-      const uploadSchemaDetails = await this.uploadSchemaFile(
-        schemaId,
-        schemaResource,
-      )
+      const uploadSchemaDetails = await this.uploadSchemaFile(schemaId, schema)
+
       if (!uploadSchemaDetails) {
         throw new Error(`Error while uploading schema on file server!`)
       }
@@ -177,14 +175,11 @@ export class PolygonSchema {
     }
   }
 
-  private async uploadSchemaFile(
-    schemaResourceId: string,
-    schemaResourcePayload: ResourcePayload,
-  ) {
+  private async uploadSchemaFile(schemaResourceId: string, schema: object) {
     try {
       const schemaPayload = {
         schemaId: `${schemaResourceId}`,
-        schema: schemaResourcePayload,
+        schema,
       }
 
       const axiosOptions = {
