@@ -365,174 +365,10 @@ export const testDidDetails = {
 }
 
 export const testContractDetails = {
-  schemaManagerContract: '0x67e8223D80aEcb337FE8D90dD41845A0DA31B4b0',
-  contractAddress: '0x9bd1A5d2ac2D391AaF7177Ee27A5520C4844f1C3',
+  schemaManagerContract: '0x552992e9f14b15bBd76488cD4c38c89B80259f37',
+  contractAddress: '0x12513116875BB3E4F098Ce74624739Ee51bAf023',
   networkUrl: 'https://rpc-mumbai.maticvigil.com',
 }
-
-export const schemaAbi = [
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '_id',
-        type: 'address',
-      },
-      {
-        internalType: 'string',
-        name: 'newSchemaId',
-        type: 'string',
-      },
-      {
-        internalType: 'string',
-        name: '_json',
-        type: 'string',
-      },
-    ],
-    name: 'createSchema',
-    outputs: [
-      {
-        internalType: 'string',
-        name: 'schemaId',
-        type: 'string',
-      },
-    ],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'initialize',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'id',
-        type: 'address',
-      },
-      {
-        indexed: false,
-        internalType: 'string',
-        name: 'schemaId',
-        type: 'string',
-      },
-      {
-        indexed: false,
-        internalType: 'string',
-        name: 'schemaJson',
-        type: 'string',
-      },
-    ],
-    name: 'SchemaCreate',
-    type: 'event',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '_newOwner',
-        type: 'address',
-      },
-    ],
-    name: 'transferOwnership',
-    outputs: [
-      {
-        internalType: 'string',
-        name: '',
-        type: 'string',
-      },
-    ],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: 'address',
-        name: 'newOwner',
-        type: 'address',
-      },
-    ],
-    name: 'TransferOwnership',
-    type: 'event',
-  },
-  {
-    inputs: [],
-    name: 'getOwner',
-    outputs: [
-      {
-        internalType: 'address',
-        name: '_owner',
-        type: 'address',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '_id',
-        type: 'address',
-      },
-      {
-        internalType: 'string',
-        name: '_schemaId',
-        type: 'string',
-      },
-    ],
-    name: 'getSchemaById',
-    outputs: [
-      {
-        components: [
-          {
-            internalType: 'string',
-            name: 'schemaJson',
-            type: 'string',
-          },
-        ],
-        internalType: 'struct SchemaRegistry.Schema',
-        name: '',
-        type: 'tuple',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address',
-      },
-      {
-        internalType: 'string',
-        name: '',
-        type: 'string',
-      },
-    ],
-    name: 'schemas',
-    outputs: [
-      {
-        internalType: 'string',
-        name: 'schemaJson',
-        type: 'string',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-]
 
 export const testSchemaSample = {
   '@context': [
@@ -592,7 +428,7 @@ export const testSchemaSample = {
   ],
 }
 
-export const testSchemaId = '074276c1-1a13-4a02-b606-7ce6c795a3e7'
+export const testSchemaId = '7db36918-723d-4fb9-a50a-094f21ec03d1'
 
 export const fileServerUrl =
   'https://9756-2401-4900-1c9a-21cf-183c-5bf7-1354-aff3.ngrok-free.app'

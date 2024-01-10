@@ -1,1 +1,1 @@
-{}
+export * from "./schema-manager"

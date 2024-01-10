@@ -1,13 +1,13 @@
 import { Contract, JsonRpcProvider, Wallet } from 'ethers'
 import { parseDid, validateDid } from './utils/did'
 import { v4 as uuidv4 } from 'uuid'
-import SchemaRegistryAbi from '../tests/fixtures/SchemaRegistryAbi.json'
+import SchemaRegistryAbi from '../src/abi/SchemaRegistry.json'
 import { buildSchemaResource } from '../src/utils/schemaHelper'
-import { didRegistryAbi } from '../tests/fixtures/test.data'
+import DidRegistryContract from '@ayanworks/polygon-did-registry-contract'
 import axios from 'axios'
 
 export type PolygonDidInitOptions = {
-  contractAddress: string
+  didRegistrarContractAddress: string
   rpcUrl: string
   privateKey: string
   schemaManagerContractAddress: string
@@ -41,7 +41,7 @@ export class PolygonSchema {
   private accessToken: string
 
   public constructor({
-    contractAddress,
+    didRegistrarContractAddress,
     schemaManagerContractAddress,
     rpcUrl,
     serverUrl,
@@ -51,15 +51,15 @@ export class PolygonSchema {
     const provider = new JsonRpcProvider(rpcUrl)
     const wallet = new Wallet(privateKey, provider)
     this.didRegistry = new Contract(
-      contractAddress,
-      didRegistryAbi, //DID registry ABI
+      didRegistrarContractAddress,
+      DidRegistryContract.abi,
       wallet,
     )
     this.accessToken = fileServerToken
     this.fileServerUrl = serverUrl
     this.schemaRegistry = new Contract(
       schemaManagerContractAddress,
-      SchemaRegistryAbi, //schemaAbi ABI
+      SchemaRegistryAbi,
       wallet,
     )
   }

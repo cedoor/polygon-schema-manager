@@ -22,7 +22,7 @@ describe('Registrar', () => {
   before(async () => {
     polygonDID = testDidDetails.did
     polygonSchemaManager = new PolygonSchema({
-      contractAddress: DID_REGISTRAR_CONTRACT_ADDRESS,
+      didRegistrarContractAddress: DID_REGISTRAR_CONTRACT_ADDRESS,
       schemaManagerContractAddress: SCHEMA_MANAGER_CONTRACT_ADDRESS,
       rpcUrl: NETWORK_URL,
       privateKey: testDidDetails.privateKey,
@@ -39,7 +39,6 @@ describe('Registrar', () => {
       testDidDetails.did,
       'PAN CARD',
     )
-    console.log('registeredSchemaDetails::::', registeredSchemaDetails)
   })
 
   it('should get transaction hash after registering schema with non-empty and non-null values for both schemaTxnReceipt and resourceTxnReceipt', async () => {
@@ -99,7 +98,7 @@ describe('Registrar', () => {
     before(async () => {
       schemaDetail = await polygonSchemaManager.getSchemaById(
         testDidDetails.did,
-        '957e577f-744e-4790-bcf2-b5e4c43aa240',
+        testSchemaId,
       )
     })
 
