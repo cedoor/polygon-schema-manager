@@ -2,7 +2,7 @@ import { Contract, JsonRpcProvider, Wallet } from 'ethers'
 import { parseDid, validateDid } from './utils/did'
 import { v4 as uuidv4 } from 'uuid'
 import SchemaRegistryAbi from './abi/SchemaRegistry.json'
-import { buildSchemaResource } from '../src/utils/schemaHelper'
+import { buildSchemaResource } from './utils/schemaHelper'
 import DidRegistryContract from '@ayanworks/polygon-did-registry-contract'
 import axios from 'axios'
 
