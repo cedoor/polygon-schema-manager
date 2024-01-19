@@ -97,7 +97,7 @@ export class PolygonSchema {
         schemaId,
         schemaName,
       )
-     
+
       const schemaTxnReceipt = await this.schemaRegistry.createSchema(
         parsedDid.didAddress,
         schemaId,
