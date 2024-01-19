@@ -2,17 +2,17 @@
 pragma solidity ^0.8.16;
 
 /**
- * @title PolygonDidRegistry
- * @dev Smart Contract for Polygon DID Method
+ * @title SchemaRegistry
+ * @dev Smart Contract for Polygon Schema Methods
  */
 contract SchemaRegistry {
-    address public owner;
+    address private owner;
 
     struct Schema {
         string schemaJson;
     }
 
-    mapping(address => mapping(string => Schema)) public schemas;
+    mapping(address => mapping(string => Schema)) private schemas;
 
     event TransferOwnership(address indexed newOwner);
     event SchemaCreate(address indexed id, string schemaId, string schemaJson);

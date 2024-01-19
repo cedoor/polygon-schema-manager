@@ -38,6 +38,7 @@ describe('Registrar', () => {
     registeredSchemaDetails = await polygonSchemaManager.createSchema(
       testDidDetails.did,
       'PAN CARD',
+      {}
     )
   })
 

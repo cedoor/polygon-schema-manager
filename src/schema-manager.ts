@@ -67,6 +67,14 @@ export class PolygonSchema {
   public async createSchema(did: string, schemaName: string, schema: object) {
     let schemaId
     let tnxSchemaId = ''
+    let tnxSchemaTxnReceipt: {
+      txnHash: string
+      to: string
+      from: string
+      nonce: string
+      gasLimit: string
+      chainId: string
+    }
 
     if (!this.accessToken) {
       throw new Error(`Invalid token!`)
@@ -89,7 +97,7 @@ export class PolygonSchema {
         schemaId,
         schemaName,
       )
-
+     
       const schemaTxnReceipt = await this.schemaRegistry.createSchema(
         parsedDid.didAddress,
         schemaId,
@@ -99,6 +107,13 @@ export class PolygonSchema {
       if (!schemaTxnReceipt.hash) {
         throw new Error(`Error while adding schema in Registry!`)
       }
+
+      const uploadSchemaDetails = await this.uploadSchemaFile(schemaId, schema)
+
+      if (!uploadSchemaDetails) {
+        throw new Error(`Error while uploading schema on file server!`)
+      }
+
       const addedResourcetxnReceipt = await this.didRegistry.addResource(
         parsedDid.didAddress,
         schemaId,
@@ -107,13 +122,15 @@ export class PolygonSchema {
 
       if (!addedResourcetxnReceipt.hash) {
         tnxSchemaId = schemaId
+        tnxSchemaTxnReceipt = {
+          txnHash: schemaTxnReceipt.hash,
+          to: schemaTxnReceipt.to,
+          from: schemaTxnReceipt.from,
+          nonce: schemaTxnReceipt.nonce,
+          gasLimit: schemaTxnReceipt.nonce,
+          chainId: schemaTxnReceipt.chainId,
+        }
         throw new Error(`Error while adding schema resource in DID Registry!`)
-      }
-
-      const uploadSchemaDetails = await this.uploadSchemaFile(schemaId, schema)
-
-      if (!uploadSchemaDetails) {
-        throw new Error(`Error while uploading schema on file server!`)
       }
 
       return {
