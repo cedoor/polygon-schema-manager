@@ -1,4 +1,4 @@
-import { Contract, JsonRpcProvider, Wallet } from 'ethers'
+import { Contract, JsonRpcProvider, SigningKey, Wallet } from 'ethers'
 import { parseDid, validateDid } from './utils/did'
 import { v4 as uuidv4 } from 'uuid'
 import SchemaRegistryAbi from './abi/SchemaRegistry.json'
@@ -9,7 +9,7 @@ import axios from 'axios'
 export type PolygonDidInitOptions = {
   didRegistrarContractAddress: string
   rpcUrl: string
-  privateKey: string
+  signingKey: SigningKey
   schemaManagerContractAddress: string
   serverUrl: string
   fileServerToken: string
@@ -46,10 +46,10 @@ export class PolygonSchema {
     rpcUrl,
     serverUrl,
     fileServerToken,
-    privateKey,
+    signingKey,
   }: PolygonDidInitOptions) {
     const provider = new JsonRpcProvider(rpcUrl)
-    const wallet = new Wallet(privateKey, provider)
+    const wallet = new Wallet(signingKey, provider)
     this.didRegistry = new Contract(
       didRegistrarContractAddress,
       DidRegistryContract.abi,
