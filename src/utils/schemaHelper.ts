@@ -1,3 +1,4 @@
+import keccak256 from 'keccak256'
 import { parseDid } from './did'
 
 /**
@@ -11,7 +12,13 @@ export async function buildSchemaResource(
   did: string,
   schemaId: string,
   name: string,
+  schema: object,
 ) {
+  const checksum = await keccak256(String(schema)).toString('hex')
+  if (!checksum) {
+    throw new Error(`Error while calculating checksum!`)
+  }
+
   return {
     resourceURI: `${did}/resources/${schemaId}`,
     resourceCollectionId: parseDid(did).didAddress,
@@ -20,7 +27,7 @@ export async function buildSchemaResource(
     resourceType: 'W3C-schema',
     mediaType: '',
     created: new Date().toISOString(),
-    checksum: '',
+    checksum,
     previousVersionId: '',
     nextVersionId: '',
   }
