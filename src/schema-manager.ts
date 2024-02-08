@@ -5,6 +5,8 @@ import SchemaRegistryAbi from './abi/SchemaRegistry.json'
 import { buildSchemaResource } from './utils/schemaHelper'
 import DidRegistryContract from '@ayanworks/polygon-did-registry-contract'
 import axios from 'axios'
+import { getResolver } from '@ayanworks/polygon-did-resolver'
+import { Resolver } from 'did-resolver'
 
 export type PolygonDidInitOptions = {
   didRegistrarContractAddress: string
@@ -52,6 +54,7 @@ export class PolygonSchema {
   private accessToken: string
   private schemaManagerContractAddress: string
   private rpcUrl: string
+  public resolver: Resolver
 
   public constructor({
     didRegistrarContractAddress,
@@ -61,6 +64,7 @@ export class PolygonSchema {
     fileServerToken,
     signingKey,
   }: PolygonDidInitOptions) {
+    this.resolver = new Resolver(getResolver())
     this.schemaManagerContractAddress = schemaManagerContractAddress
     this.rpcUrl = rpcUrl
     const provider = new JsonRpcProvider(rpcUrl)
@@ -80,6 +84,10 @@ export class PolygonSchema {
   }
 
   public async createSchema(did: string, schemaName: string, schema: object) {
+    if (!schemaName || Object?.keys(schema)?.length === 0) {
+      throw new Error(`Schema name and Schema are required!`)
+    }
+
     let schemaId
     let tnxSchemaId = ''
     let tnxSchemaTxnReceipt: {
@@ -102,10 +110,11 @@ export class PolygonSchema {
       }
       const parsedDid = parseDid(did)
 
-      const didDocument = await this.didRegistry.getDIDDoc(parsedDid.didAddress)
-      if (!didDocument[0]) {
+      const didDetails = await this.resolver.resolve(did)
+      if (!didDetails.didDocument) {
         throw new Error(`The DID document for the given DID was not found!`)
       }
+
       schemaId = uuidv4()
       const schemaResource: ResourcePayload = await buildSchemaResource(
         did,
@@ -185,6 +194,9 @@ export class PolygonSchema {
 
   public async getSchemaById(did: string, schemaId: string) {
     try {
+      if (!schemaId) {
+        throw new Error(`Schema id is required!`)
+      }
       const isValidDid = validateDid(did)
       if (!isValidDid) {
         throw new Error('invalid did provided')
@@ -192,8 +204,8 @@ export class PolygonSchema {
 
       const parsedDid = parseDid(did)
 
-      const didDocument = await this.didRegistry.getDIDDoc(parsedDid.didAddress)
-      if (!didDocument[0]) {
+      const didDetails = await this.resolver.resolve(did)
+      if (!didDetails.didDocument) {
         throw new Error(`The DID document for the given DID was not found!`)
       }
       const schemaDetails = await this.schemaRegistry.getSchemaById(
@@ -210,8 +222,34 @@ export class PolygonSchema {
     }
   }
 
+  public async getAllSchemaByDID(did: string) {
+    try {
+      const isValidDid = validateDid(did)
+      if (!isValidDid) {
+        throw new Error('invalid did provided')
+      }
+      const didDetails = await this.resolver.resolve(did)
+
+      if (!didDetails?.didDocumentMetadata?.linkedResourceMetadata) {
+        return []
+      }
+      const linkedResourceMetadata =
+        didDetails?.didDocumentMetadata?.linkedResourceMetadata
+      const schemaList: ResourcePayload[] = linkedResourceMetadata.filter(
+        (element: ResourcePayload) => element.resourceType === 'W3C-schema',
+      )
+      return schemaList
+    } catch (error) {
+      console.log(`Error occurred in getAllSchemaByDID function ${error} `)
+      throw error
+    }
+  }
+
   private async uploadSchemaFile(schemaResourceId: string, schema: object) {
     try {
+      if (!schemaResourceId || Object?.keys(schema)?.length === 0) {
+        throw new Error(`Schema resource id and schema are required!`)
+      }
       const schemaPayload = {
         schemaId: `${schemaResourceId}`,
         schema,
@@ -237,9 +275,12 @@ export class PolygonSchema {
 
   public async estimateTxFee(
     method: string,
-    argument: string[],
+    argument?: string[],
   ): Promise<EstimatedTxDetails | null> {
     try {
+      if (!method) {
+        throw new Error(`Method is required for estimate transaction!`)
+      }
       const provider = new JsonRpcProvider(this.rpcUrl)
       const contract = new Contract(
         this.schemaManagerContractAddress,

@@ -9,7 +9,7 @@ import {
 import { describe, it, before } from 'node:test'
 import assert from 'node:assert'
 import { arrayHasKeys } from './utils/array'
-import { PolygonSchema } from '../src/schema-manager'
+import { PolygonSchema, ResourcePayload } from '../src/schema-manager'
 import { SigningKey } from 'ethers'
 
 const NETWORK_URL = testContractDetails.networkUrl
@@ -96,7 +96,7 @@ describe('Schema Manager', () => {
   })
 
   describe('test getSchemaById function', () => {
-    let schemaDetail: any
+    let schemaDetail: ResourcePayload
 
     before(async () => {
       schemaDetail = await polygonSchemaManager.getSchemaById(
@@ -122,6 +122,35 @@ describe('Schema Manager', () => {
     })
   })
 
+  describe('test getAllSchemaByDID function', () => {
+    let schemaList: ResourcePayload[]
+
+    before(async () => {
+      schemaList = await polygonSchemaManager.getAllSchemaByDID(
+        testDidDetails.did,
+      )
+    })
+
+    it('should have all the object keys for schemaList', () => {
+      const expectedKeys = [
+        'resourceURI',
+        'resourceCollectionId',
+        'resourceId',
+        'resourceName',
+        'resourceType',
+        'mediaType',
+        'created',
+        'checksum',
+        'previousVersionId',
+        'nextVersionId',
+      ]
+
+      schemaList?.forEach((resource: ResourcePayload) => {
+        assert.deepStrictEqual(Object.keys(resource), expectedKeys)
+      })
+    })
+  })
+
   describe('test estimate transaction', () => {
     let transactionDetails: any
 
@@ -130,8 +159,8 @@ describe('Schema Manager', () => {
         'createSchema',
         [
           '0x13cd23928Ae515b86592C630f56C138aE4c7B79a',
-          '68768734687ytruwytuqyetrywqt',
-          'ertyuioiuytyuiuyt',
+          '550e8400-e29b-41d4-a716-446655440000',
+          'dummy schema details',
         ],
       )
     })
