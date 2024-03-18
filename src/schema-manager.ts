@@ -90,14 +90,7 @@ export class PolygonSchema {
 
     let schemaId
     let tnxSchemaId = ''
-    let tnxSchemaTxnReceipt: {
-      txnHash: string
-      to: string
-      from: string
-      nonce: string
-      gasLimit: string
-      chainId: string
-    }
+    let schemaTxhash: string = ''
 
     if (!this.accessToken) {
       throw new Error(`Invalid token!`)
@@ -147,43 +140,21 @@ export class PolygonSchema {
 
       if (!addedResourcetxnReceipt.hash) {
         tnxSchemaId = schemaId
-        tnxSchemaTxnReceipt = {
-          txnHash: schemaTxnReceipt.hash,
-          to: schemaTxnReceipt.to,
-          from: schemaTxnReceipt.from,
-          nonce: schemaTxnReceipt.nonce,
-          gasLimit: schemaTxnReceipt.nonce,
-          chainId: schemaTxnReceipt.chainId,
-        }
+        schemaTxhash = schemaTxnReceipt.hash
         throw new Error(`Error while adding schema resource in DID Registry!`)
       }
 
       return {
         did,
         schemaId,
-        txnReceipt: {
-          schemaTxnReceipt: {
-            txnHash: schemaTxnReceipt.hash,
-            to: schemaTxnReceipt.to,
-            from: schemaTxnReceipt.from,
-            nonce: schemaTxnReceipt.nonce,
-            gasLimit: schemaTxnReceipt.nonce,
-            chainId: schemaTxnReceipt.chainId,
-          },
-          resourceTxnReceipt: {
-            txnHash: addedResourcetxnReceipt.hash,
-            to: addedResourcetxnReceipt.to,
-            from: addedResourcetxnReceipt.from,
-            nonce: addedResourcetxnReceipt.nonce,
-            gasLimit: addedResourcetxnReceipt.nonce,
-            chainId: addedResourcetxnReceipt.chainId,
-          },
-        },
+        schemaTxnHash: schemaTxnReceipt.hash,
+        resourceTxnHash: addedResourcetxnReceipt.hash,
       }
     } catch (error) {
       console.log(`Error occurred in createSchema function ${error} `)
       return {
         tnxSchemaId,
+        schemaTxhash,
         schemaState: {
           state: 'failed',
           reason: `unknownError: ${error}`,
