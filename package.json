@@ -22,7 +22,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@ayanworks/polygon-did-registry-contract": "2.0.1-alpha.3",
-    "@ayanworks/polygon-did-resolver": "^0.0.16-alpha.3",
+    "@ayanworks/polygon-did-resolver": "^0.0.16-alpha.11",
     "@nomicfoundation/hardhat-verify": "^2.0.3",
     "axios": "^1.6.3",
     "did-resolver": "^4.1.0",

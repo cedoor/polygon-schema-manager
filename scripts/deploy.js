@@ -3,11 +3,11 @@ const { ethers, upgrades } = require('hardhat')
 async function main() {
   try {
     console.log('Deploying the smart contract...')
-    const PolygonDidRegistry = await ethers.getContractFactory('SchemaRegistry')
+    const SchemaRegistry = await ethers.getContractFactory('SchemaRegistry')
 
     // To deploy the initial upgradable smart contract
 
-    const contract = await upgrades.deployProxy(PolygonDidRegistry, {
+    const contract = await upgrades.deployProxy(SchemaRegistry, {
       initializer: 'initialize',
     })
 

@@ -356,18 +356,18 @@ export const didRegistryAbi = [
 ]
 
 export const testDidDetails = {
-  address: '0x13cd23928Ae515b86592C630f56C138aE4c7B79a',
-  did: 'did:polygon:testnet:0x13cd23928Ae515b86592C630f56C138aE4c7B79a',
+  address: '0x4487cB2567De2Ca6dc5F79A7f6ae944522C4b698',
+  did: 'did:polygon:testnet:0x4487cB2567De2Ca6dc5F79A7f6ae944522C4b698',
   privateKey:
-    '3f6254328fa58202094c954d89964119830f85e2f4bfdbabb1d8bcfc008d2fdd', //test key
+    '6320c5bcc5edfb1f3324b94a67c0e69916d828d6374ddb1dfeae92c27e3098de', //test key
   publicKeyBase58:
     '7Lnm1Zi2K75KVgHPrHADCpfa9cLAtRRocBgLsFVLw5NRPUgoLBBv1Se8ttjx4P7fXfNS5gazJmKqohNmwEqx8VjDYfPvw',
 }
 
 export const testContractDetails = {
-  schemaManagerContract: '0x552992e9f14b15bBd76488cD4c38c89B80259f37',
-  contractAddress: '0x12513116875BB3E4F098Ce74624739Ee51bAf023',
-  networkUrl: 'https://rpc-mumbai.maticvigil.com',
+  schemaManagerContract: '0xD6f235F1159970211B3628CbC15e6c75D4Fb6e6e',
+  contractAddress: '0xc087766218b885C6283072BA316a2Bc31B5c17db',
+  networkUrl: 'https://rpc-amoy.polygon.technology',
 }
 
 export const testSchemaSample = {
