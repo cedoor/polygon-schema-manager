@@ -75,6 +75,7 @@ contract SchemaRegistry {
         string memory newSchemaId,
         string memory _json
     ) external returns (string memory schemaId) {
+        require(_id != address(0), 'Invalid address provided');
         Schema memory newSchema = Schema(_json);
         schemas[_id][newSchemaId] = newSchema;
 
