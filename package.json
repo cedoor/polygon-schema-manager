@@ -21,8 +21,8 @@
   "author": "Sai Ranjit Tummalapalli",
   "license": "Apache-2.0",
   "dependencies": {
-    "@ayanworks/polygon-did-registry-contract": "2.0.1-alpha.3",
-    "@ayanworks/polygon-did-resolver": "^0.0.16-alpha.11",
+    "@ayanworks/polygon-did-registry-contract": "2.0.1-alpha.4",
+    "@ayanworks/polygon-did-resolver": "^0.0.16-alpha.13",
     "@nomicfoundation/hardhat-verify": "^2.0.3",
     "axios": "^1.6.3",
     "did-resolver": "^4.1.0",
@@ -40,7 +40,7 @@
     "mocha": "^7.0.0",
     "prettier": "^3.0.2",
     "release-it": "^16.1.5",
-    "solc": "^0.8.21",
+    "solc": "0.8.16",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
   },

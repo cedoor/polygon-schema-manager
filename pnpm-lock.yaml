@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@ayanworks/polygon-did-registry-contract':
-        specifier: 2.0.1-alpha.3
-        version: 2.0.1-alpha.3
+        specifier: 2.0.1-alpha.4
+        version: 2.0.1-alpha.4
       '@ayanworks/polygon-did-resolver':
-        specifier: ^0.0.16-alpha.11
-        version: 0.0.16-alpha.11
+        specifier: ^0.0.16-alpha.13
+        version: 0.0.16-alpha.13
       '@nomicfoundation/hardhat-verify':
         specifier: ^2.0.3
         version: 2.0.3(hardhat@2.19.4(ts-node@10.9.2(@types/node@18.19.3)(typescript@5.3.3))(typescript@5.3.3))
@@ -61,8 +61,8 @@ importers:
         specifier: ^16.1.5
         version: 16.3.0(typescript@5.3.3)
       solc:
-        specifier: ^0.8.21
-        version: 0.8.23
+        specifier: 0.8.16
+        version: 0.8.16
       ts-node:
         specifier: ^10.9.1
         version: 10.9.2(@types/node@18.19.3)(typescript@5.3.3)
@@ -88,11 +88,11 @@ packages:
   '@aws-sdk/util-utf8-browser@3.259.0':
     resolution: {integrity: sha512-UvFa/vR+e19XookZF8RzFZBrw2EUkQWxiBW0yYQAhvk3C+QVGl0H3ouca8LDBlBfQKXwmW3huo/59H8rwb1wJw==}
 
-  '@ayanworks/polygon-did-registry-contract@2.0.1-alpha.3':
-    resolution: {integrity: sha512-8FZZVAmzXZn0pjZasuxdRblL0obK91JoaoXzpM4oZ7hD5VRUbiWf7BTh17WsWc6Oaf6XtafT4csuBo11fZiUoQ==}
+  '@ayanworks/polygon-did-registry-contract@2.0.1-alpha.4':
+    resolution: {integrity: sha512-a35EtcPyLyKjq0y0uqi7uHXPeoMMSoC2oai88xY2PlLV9avQwyCIOaVsIKcuKdJaPWPmFQaeU5S7iY/pfVguWQ==}
 
-  '@ayanworks/polygon-did-resolver@0.0.16-alpha.11':
-    resolution: {integrity: sha512-rQ6iVz0uht/hLkYA29E2iHN7xW0EusG6ognndBJF0QUxuPBB2kbmcr/4kW1E1m8FJLPvmEX/ed5v0pbBnGSJwA==}
+  '@ayanworks/polygon-did-resolver@0.0.16-alpha.13':
+    resolution: {integrity: sha512-8SRDPQpX/AU1xfmH2O7DzqeDtPdE1FA3z7ONp/v1xvP1h00GU2nKie4jeWHipCVfJOInEmiJbl0FIKFcviERsA==}
 
   '@babel/code-frame@7.23.5':
     resolution: {integrity: sha512-CgH3s1a96LipHCmSUmYFPwY7MNx8C3avkq7i4Wl3cfa662ldtUe4VM1TPXX70pfmrlWTb6jLqTYrZyT2ZTJBgA==}
@@ -2027,11 +2027,6 @@ packages:
     resolution: {integrity: sha512-avsJQhyd+680gKXyG/sQc0nXaC6rBkPOfyHYcFb9+hdkqQkR9bdnkJ0AMZhke0oesPqIO+mFFJ+IdBc7mst4IA==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
 
-  n@9.2.0:
-    resolution: {integrity: sha512-R8mFN2OWwNVc+r1f9fDzcT34DnDwUIHskrpTesZ6SdluaXBBnRtTu5tlfaSPloBi1Z/eGJoPO9nhyawWPad5UQ==}
-    os: ['!win32']
-    hasBin: true
-
   nanoid@3.3.3:
     resolution: {integrity: sha512-p1sjXuopFs0xg+fPASzQ28agW1oHD7xDsd9Xkf3T15H3c/cifrFHVwrh74PdoklAPi+i7MdRsE47vm2r6JoB+w==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
@@ -2521,8 +2516,8 @@ packages:
     engines: {node: '>=8.0.0'}
     hasBin: true
 
-  solc@0.8.23:
-    resolution: {integrity: sha512-uqe69kFWfJc3cKdxj+Eg9CdW1CP3PLZDPeyJStQVWL8Q9jjjKD0VuRAKBFR8mrWiq5A7gJqERxJFYJsklrVsfA==}
+  solc@0.8.16:
+    resolution: {integrity: sha512-6oZg7FAhIouj2zYLvoR3Q4fMP/+BGPR7sY7GcrEXKIp+DRd8RmpDEFO1LUBKpClUiaYguNgmthTFmnPl4MeiMQ==}
     engines: {node: '>=10.0.0'}
     hasBin: true
 
@@ -2978,11 +2973,11 @@ snapshots:
     dependencies:
       tslib: 2.6.2
 
-  '@ayanworks/polygon-did-registry-contract@2.0.1-alpha.3': {}
+  '@ayanworks/polygon-did-registry-contract@2.0.1-alpha.4': {}
 
-  '@ayanworks/polygon-did-resolver@0.0.16-alpha.11':
+  '@ayanworks/polygon-did-resolver@0.0.16-alpha.13':
     dependencies:
-      '@ayanworks/polygon-did-registry-contract': 2.0.1-alpha.3
+      '@ayanworks/polygon-did-registry-contract': 2.0.1-alpha.4
       did-resolver: 4.1.0
       ethers: 5.7.2
     transitivePeerDependencies:
@@ -5507,8 +5502,6 @@ snapshots:
 
   mute-stream@1.0.0: {}
 
-  n@9.2.0: {}
-
   nanoid@3.3.3: {}
 
   napi-macros@2.2.2: {}
@@ -6062,14 +6055,13 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  solc@0.8.23:
+  solc@0.8.16:
     dependencies:
       command-exists: 1.2.9
       commander: 8.3.0
       follow-redirects: 1.15.5(debug@4.3.4)
       js-sha3: 0.8.0
       memorystream: 0.3.1
-      n: 9.2.0
       semver: 5.7.2
       tmp: 0.0.33
     transitivePeerDependencies:

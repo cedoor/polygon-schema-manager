@@ -5,6 +5,11 @@
       "address": "0xD6f235F1159970211B3628CbC15e6c75D4Fb6e6e",
       "txHash": "0xa5942f72d8477348eef36ae29bb9e7c2594b35175b5a990b8d0f40b8c838b489",
       "kind": "transparent"
+    },
+    {
+      "address": "0x289c7Bd4C7d38cC54bff370d6f9f01b74Df51b11",
+      "txHash": "0x9821228aae102dd44263f7afc762210988351a04065bf82148d2b99a5d1841be",
+      "kind": "transparent"
     }
   ],
   "impls": {
@@ -65,6 +70,78 @@
             "numberOfBytes": "32"
           },
           "t_struct(Schema)7_storage": {
+            "label": "struct SchemaRegistry.Schema",
+            "members": [
+              {
+                "label": "schemaJson",
+                "type": "t_string_storage",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          }
+        },
+        "namespaces": {}
+      }
+    },
+    "027d80819c713986c58fb39581c01871f0084659c28fee2802da345704efe958": {
+      "address": "0x2408E217EDC14efc78803226E1D2cA8b32413C9b",
+      "txHash": "0xa5d0f0dd0951a690261e76188265306d62b59167235724bdd7198c197bc6cf8d",
+      "layout": {
+        "solcVersion": "0.8.16",
+        "storage": [
+          {
+            "label": "owner",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "SchemaRegistry",
+            "src": "contracts/SchemaRegistry.sol:9"
+          },
+          {
+            "label": "schemas",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_mapping(t_address,t_mapping(t_string_memory_ptr,t_struct(Schema)40_storage))",
+            "contract": "SchemaRegistry",
+            "src": "contracts/SchemaRegistry.sol:15"
+          },
+          {
+            "label": "initialized",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_bool",
+            "contract": "SchemaRegistry",
+            "src": "contracts/SchemaRegistry.sol:19"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_mapping(t_address,t_mapping(t_string_memory_ptr,t_struct(Schema)40_storage))": {
+            "label": "mapping(address => mapping(string => struct SchemaRegistry.Schema))",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_string_memory_ptr,t_struct(Schema)40_storage)": {
+            "label": "mapping(string => struct SchemaRegistry.Schema)",
+            "numberOfBytes": "32"
+          },
+          "t_string_memory_ptr": {
+            "label": "string",
+            "numberOfBytes": "32"
+          },
+          "t_string_storage": {
+            "label": "string",
+            "numberOfBytes": "32"
+          },
+          "t_struct(Schema)40_storage": {
             "label": "struct SchemaRegistry.Schema",
             "members": [
               {
