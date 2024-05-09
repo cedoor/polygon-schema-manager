@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@ayanworks/polygon-did-registry-contract':
-        specifier: 2.0.1-alpha.6
-        version: 2.0.1-alpha.6
+        specifier: 2.0.1-alpha.7
+        version: 2.0.1-alpha.7
       '@ayanworks/polygon-did-resolver':
-        specifier: ^0.0.16-alpha.14
-        version: 0.0.16-alpha.14
+        specifier: ^0.0.16-alpha.15
+        version: 0.0.16-alpha.15
       '@nomicfoundation/hardhat-verify':
         specifier: ^2.0.3
         version: 2.0.3(hardhat@2.19.4(ts-node@10.9.2(@types/node@18.19.3)(typescript@5.3.3))(typescript@5.3.3))
@@ -88,11 +88,11 @@ packages:
   '@aws-sdk/util-utf8-browser@3.259.0':
     resolution: {integrity: sha512-UvFa/vR+e19XookZF8RzFZBrw2EUkQWxiBW0yYQAhvk3C+QVGl0H3ouca8LDBlBfQKXwmW3huo/59H8rwb1wJw==}
 
-  '@ayanworks/polygon-did-registry-contract@2.0.1-alpha.6':
-    resolution: {integrity: sha512-b/Pk0ByQdsleC1bwfP9J2lC6vkpfk4UZk7oJff3/O86Ael9rk0kQ7t3yu4Q7lh4bWEoeJ9Gij8CR1o+ImT9U7g==}
+  '@ayanworks/polygon-did-registry-contract@2.0.1-alpha.7':
+    resolution: {integrity: sha512-pwX45XsGT3LrIBpnIJ6FrzPuB3gSTWiNVSyGGniL0ofUgcsNGqXOv2g3WQSDcG9b7/+AGeoJ6tYqshCbnjsmvQ==}
 
-  '@ayanworks/polygon-did-resolver@0.0.16-alpha.14':
-    resolution: {integrity: sha512-uxDzHScLbUP2x15Pvs3zKeaFx+tYzgep1rXQl0p2bxFD0sRxiX1nhJgMGXNzGtzNIKXCbbnt1Ak/IzB65CQx6Q==}
+  '@ayanworks/polygon-did-resolver@0.0.16-alpha.15':
+    resolution: {integrity: sha512-JyjgFaWWSQzzj1LKsopYVvIJjeo6lzqfVIheILmgxcxvTo1/skFatthocBNmyQ4Vc8QyKc05s5AbTUkm74wNbg==}
 
   '@babel/code-frame@7.23.5':
     resolution: {integrity: sha512-CgH3s1a96LipHCmSUmYFPwY7MNx8C3avkq7i4Wl3cfa662ldtUe4VM1TPXX70pfmrlWTb6jLqTYrZyT2ZTJBgA==}
@@ -2973,11 +2973,11 @@ snapshots:
     dependencies:
       tslib: 2.6.2
 
-  '@ayanworks/polygon-did-registry-contract@2.0.1-alpha.6': {}
+  '@ayanworks/polygon-did-registry-contract@2.0.1-alpha.7': {}
 
-  '@ayanworks/polygon-did-resolver@0.0.16-alpha.14':
+  '@ayanworks/polygon-did-resolver@0.0.16-alpha.15':
     dependencies:
-      '@ayanworks/polygon-did-registry-contract': 2.0.1-alpha.6
+      '@ayanworks/polygon-did-registry-contract': 2.0.1-alpha.7
       did-resolver: 4.1.0
       ethers: 5.7.2
     transitivePeerDependencies:
