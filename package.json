@@ -1,6 +1,6 @@
 {
   "name": "@ayanworks/polygon-schema-manager",
-  "version": "0.0.2-alpha.9",
+  "version": "0.0.2-alpha.10",
   "description": "Polygon schema manager",
   "main": "build/index.js",
   "files": [
