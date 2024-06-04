@@ -1,4 +1,4 @@
-# Polygon schema Registrar
+# Polygon schema registrar
 
 This GitHub repository is dedicated to creating W3C-compliant schemas for JSON-LD credentials, facilitating interoperability and standardization in digital credentialing.
 Methods
