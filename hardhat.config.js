@@ -21,19 +21,19 @@ module.exports = {
   },
   networks: {
     hardhat: {},
-    amoy: {
-      url: process.env.AMOY_RPCURL,
-      accounts: [`0x${process.env.SIGNER_TESTNET}`],
+    sepolia: {
+      url: 'https://rpc2.sepolia.org',
+      accounts: [`0x${process.env.SIGNER}`],
     },
-    //Use for mainnet deployment
-    // polygon: {
-    //   url: process.env.MAINNET_RPCURL,
-    //   accounts: [`0x${process.env.SIGNER_MAINNET}`],
+    // mainnet: {
+    //   url: 'https://eth.llamarpc.com',
+    //   accounts: [`0x${process.env.SIGNER}`],
     // },
   },
   etherscan: {
-    apiKey: {
-      polygonMumbai: process.env.VERIFICATION_KEY,
-    },
+    apiKey: process.env.VERIFICATION_KEY,
+  },
+  sourcify: {
+    enabled: true,
   },
 }

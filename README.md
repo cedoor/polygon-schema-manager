@@ -1,16 +1,16 @@
-# Polygon schema registrar
+# Ethereum schema registrar
 
 This GitHub repository is dedicated to creating W3C-compliant schemas for JSON-LD credentials, facilitating interoperability and standardization in digital credentialing.
 Methods
 
 ## Contract Deployment
 
-|        Network         | ChainId |              Contract Address              |
-| :--------------------: | :-----: | :----------------------------------------: |
-|    Polygon Mainnet     |   137   | 0x4B16719E73949a62E9A7306F352ec73F1B143c27 |
-| Polygon Testnet (amoy) |  80002  | 0x4742d43C2dFCa5a1d4238240Afa8547Daf87Ee7a |
+|          Network           | ChainId  |              Contract Address              |
+| :------------------------: | :------: | :----------------------------------------: |
+|      Ethereum Mainnet      |    1     |                                            |
+| Ethereum Testnet (Sepolia) | 11155111 | 0xb41369cf49Bb6d5b7788411AFe86F3618B845869 |
 
-### Example of Polygon JSON-LD Schema:
+### Example of Ethereum JSON-LD Schema:
 
 ```json
 {

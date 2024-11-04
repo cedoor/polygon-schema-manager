@@ -1,0 +1,84 @@
+{
+  "manifestVersion": "3.2",
+  "proxies": [
+    {
+      "address": "0xb41369cf49Bb6d5b7788411AFe86F3618B845869",
+      "txHash": "0xd25b282cdf58e950248387b897af83510f3dd52e2bd0e5b6cbadf86503e8d921",
+      "kind": "transparent"
+    }
+  ],
+  "impls": {
+    "027d80819c713986c58fb39581c01871f0084659c28fee2802da345704efe958": {
+      "address": "0x611eB9a5D86d146BB26bcF93f27ce38eC96D4A44",
+      "txHash": "0x31a4ba8027ff6ab5a7ba5f54fea686127dddfab81fa306d7a22805d9027b58d5",
+      "layout": {
+        "solcVersion": "0.8.16",
+        "storage": [
+          {
+            "label": "owner",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "SchemaRegistry",
+            "src": "contracts/SchemaRegistry.sol:9"
+          },
+          {
+            "label": "schemas",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_mapping(t_address,t_mapping(t_string_memory_ptr,t_struct(Schema)7_storage))",
+            "contract": "SchemaRegistry",
+            "src": "contracts/SchemaRegistry.sol:15"
+          },
+          {
+            "label": "initialized",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_bool",
+            "contract": "SchemaRegistry",
+            "src": "contracts/SchemaRegistry.sol:19"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_mapping(t_address,t_mapping(t_string_memory_ptr,t_struct(Schema)7_storage))": {
+            "label": "mapping(address => mapping(string => struct SchemaRegistry.Schema))",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_string_memory_ptr,t_struct(Schema)7_storage)": {
+            "label": "mapping(string => struct SchemaRegistry.Schema)",
+            "numberOfBytes": "32"
+          },
+          "t_string_memory_ptr": {
+            "label": "string",
+            "numberOfBytes": "32"
+          },
+          "t_string_storage": {
+            "label": "string",
+            "numberOfBytes": "32"
+          },
+          "t_struct(Schema)7_storage": {
+            "label": "struct SchemaRegistry.Schema",
+            "members": [
+              {
+                "label": "schemaJson",
+                "type": "t_string_storage",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          }
+        },
+        "namespaces": {}
+      }
+    }
+  }
+}

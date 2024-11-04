@@ -7,6 +7,7 @@
     "build"
   ],
   "scripts": {
+    "deploy": "hardhat run ./scripts/deploy.js",
     "clean": "rm -rf build",
     "clean:deps": "pnpm clean && rm -rf node_modules",
     "build": "pnpm clean && tsc",
